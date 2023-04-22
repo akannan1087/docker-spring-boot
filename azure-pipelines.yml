@@ -44,3 +44,11 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'Pay-As-You-Go (735d5c5d-6148-48b7-8f67-4af45c25fc19)'
+        azureResourceGroup: 'myResourceGroup'
+        kubernetesCluster: 'myAKSCluster'
+        namespace: 'helm-demo'
+        command: 'ls'
