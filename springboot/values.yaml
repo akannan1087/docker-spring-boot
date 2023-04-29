@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: myacrrepo43.azurecr.io/akannandockerspringboot
+  repository: myacrrepo531.azurecr.io/akannan1087/docker-spring-boot
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
