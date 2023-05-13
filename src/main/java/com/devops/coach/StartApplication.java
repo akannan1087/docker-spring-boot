@@ -12,8 +12,8 @@ public class StartApplication {
 
     @GetMapping("/")
     public String index(final Model model) {
-        model.addAttribute("title", "We are learning Deployment of Docker + SpringBoot + Helm + AKS Cluster");
-        model.addAttribute("msg", "Welcome to the springboot docker container running inside AKS Cluster!");
+        model.addAttribute("title", "We are learning Deployment of Docker + SpringBoot + Helm + EKS Cluster");
+        model.addAttribute("msg", "Welcome to the springboot docker container running inside EKS Cluster!");
         return "index";
     }
 
