@@ -12,8 +12,8 @@ public class StartApplication {
 
     @GetMapping("/")
     public String index(final Model model) {
-        model.addAttribute("title", "Howdy People!");
-        model.addAttribute("msg", "This is one of the real time scenarios of deploying springboot app inside EKS cluster using helm and Jenkins pipeline!!!!!");
+        model.addAttribute("title", "Howdy Folks..Welcome to Devops Coaching by Coach AK!");
+        model.addAttribute("msg", "We are deploying springboot app inside EKS cluster using helm and Jenkins pipeline!!!!!");
         return "index";
     }
 
