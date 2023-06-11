@@ -13,7 +13,7 @@ public class StartApplication {
     @GetMapping("/")
     public String index(final Model model) {
         model.addAttribute("title", "Howdy Folks..Welcome to Devops Coaching by Coach AK!");
-        model.addAttribute("msg", "We are deploying springboot app inside AKS cluster using helm and Jenkins pipeline!!!!!");
+        model.addAttribute("msg", "We are deploying springboot app inside AKS cluster using Helm charts, Jenkins pipeline!!!!!");
         return "index";
     }
 
