@@ -35,7 +35,6 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        containerRegistry: 'Arti'
         repository: 'docker-local'
         tags: |
           $(tag)
