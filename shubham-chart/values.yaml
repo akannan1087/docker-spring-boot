@@ -37,7 +37,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: Nodeport
+  type: NodePort
   port: 80
 
 ingress:
