@@ -21,23 +21,11 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean install
-  docker:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Docker
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'docker'
-        java-version: '17'  # Use the appropriate Java version
 
     - name: Build Docker image
       run: |
-        docker build -t your-docker-registry/my-app:latest .
-        docker tag your-docker-registry/my-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-app:latest
+        docker build -t my-docker-repo/my-app:latest .
+        docker tag my-docker-repo/my-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-app:latest
 
     - name: Login to Amazon ECR
       run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
