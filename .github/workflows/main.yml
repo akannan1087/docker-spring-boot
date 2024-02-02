@@ -38,3 +38,5 @@ jobs:
       run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-docker-repo:latest
     - name: Update kube config
       run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region ${{ secrets.AWS_REGION }}
+    - name: Deploy to EKS Cluster
+      run: kubectl apply -f eks-deploy.yaml
