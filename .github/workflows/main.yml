@@ -28,6 +28,8 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
+    - name: Scan
+      run: mvn sonar:sonar
     - name: Build Docker image
       run: |
         docker build -t my-docker-repo .
