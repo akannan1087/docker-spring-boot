@@ -24,5 +24,5 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t akdevopscoaching/myspringbootapp:${IMAGE_TAG} .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/myspringbootapp:${IMAGE_TAG}
+        docker push akdevopscoaching/myspringbootapp:${IMAGE_TAG}
 
