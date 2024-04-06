@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
         distribution: 'adopt'
-        java-version: '11'
+        java-version: '17'
     - name: Build with Maven
       run: mvn clean install
     - name: Login to Docker Hub
@@ -23,6 +23,6 @@ jobs:
       env:
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/myspringbootapp:${IMAGE_TAG} .
+        docker build -t akdevopscoaching/myspringbootapp:${IMAGE_TAG} .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/myspringbootapp:${IMAGE_TAG}
 
