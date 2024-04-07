@@ -14,14 +14,20 @@ jobs:
         java-version: '17'
     - name: Build with Maven
       run: mvn clean install
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
+    - name: Setup AWS ECR Details
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{secrets.AWS_REGION}}
+    - name: Login to Amazon ECR
+      id: login-pf-aws-ecr
+      uses: aws-actions/amazon-ecr-login@v1
     - name: Build and push Docker image
       env:
+        ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{secrets.AWS_ECR_REPO}}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/myspringbootapp:${IMAGE_TAG} .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/myspringbootapp:${IMAGE_TAG}
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
