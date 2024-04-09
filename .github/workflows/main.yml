@@ -1,0 +1,33 @@
+name: cicd-workflow to create docker image and upload into AWS ECR
+on:
+  push:
+    branches: [ "master" ]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+    - name: Build with Maven
+      run: mvn clean install
+    - name: Setup AWS ECR Details
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{secrets.AWS_REGION}}
+    - name: Login to Amazon ECR
+      id: login-pf-aws-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build and push Docker image
+      env:
+        ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{secrets.REPO_NAME}}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
