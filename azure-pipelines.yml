@@ -10,10 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: SonarQubePrepare@5
-  inputs:
-    SonarQube: 'My_SonarQube'
-    scannerMode: 'Other'
+# - task: SonarQubePrepare@5
+#  inputs:
+#    SonarQube: 'My_SonarQube'
+#    scannerMode: 'Other'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
