@@ -23,7 +23,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install sonar:sonar'
+    goals: 'clean install'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
