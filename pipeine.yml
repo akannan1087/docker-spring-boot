@@ -1,0 +1,24 @@
+resources:
+  repositories:
+  - repository: pf
+    type: git
+    name: CVX-DevOps/ADOPipeline
+    ref: refs/tags/4.7
+
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'pip install requests'
+- task: PythonScript@0
+  displayName: 'Run a Python script'
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: 'PMMI-POC/devops/push_file.py'
+    failOnStderr: true
