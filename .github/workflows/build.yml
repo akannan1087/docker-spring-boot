@@ -1,14 +1,4 @@
 
-jobs:
-  cleanup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clean up old workflow runs
-        uses: actions/purge-workflow-runs@v1
-        with:
-          workflow-token: ${{ secrets.GITHUB_TOKEN }}
-
-
 
 name: Build
 
@@ -22,7 +12,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions: read-all
     steps:
       - uses: actions/checkout@v2
