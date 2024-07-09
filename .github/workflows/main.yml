@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: self-host
+    runs-on: ubuntu-latest
     permissions: read-all
     steps:
       - uses: actions/checkout@v2
