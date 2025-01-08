@@ -31,3 +31,12 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      # Download and install Trivy
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+    # Scan the Docker image
+    - name: Scan Docker Image
+      run: |
+        trivy image --exit-code 1 --severity CRITICAL,HIGH $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
