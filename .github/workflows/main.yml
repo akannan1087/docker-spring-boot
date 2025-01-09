@@ -2,6 +2,9 @@ name: cicd-workflow to create docker image and upload into AWS ECR
 on:
   push:
     branches: [ "master" ]
+env: # Declare global environment variables
+  ECR_REGISTRY: ""
+  ECR_REPOSITORY: ""
 jobs:
   job1:
     runs-on: ubuntu-latest
