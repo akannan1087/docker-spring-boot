@@ -29,14 +29,15 @@ jobs:
         ECR_REPOSITORY: ${{secrets.REPO_NAME}}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
       # Download and install Trivy
-    - name: Install Trivy
-      run: |
-        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-    # Scan the Docker image
-    - name: Scan Docker Image
-      run: |
-        trivy image --exit-code 1 --severity CRITICAL,HIGH $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.28.0    # Scan the Docker image
+      with:
+        image-ref: '$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
