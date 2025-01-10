@@ -30,7 +30,7 @@ stages:
     steps:
     - task: Maven@4
       inputs:
-        mavenPomFile: 'MyAwesome/pom.xml'
+        mavenPomFile: 'MyAwesomeApp/pom.xml'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         javaHomeOption: 'JDKVersion'
