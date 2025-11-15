@@ -9,4 +9,4 @@ jobs:
   call-reusable-workflow:
     uses: akannan1087/platform-build-reusable-workflows-repo/.github/workflows/java-build-test.yml@main
     with:
-      java-version: '17'
+      java_version: '17'
