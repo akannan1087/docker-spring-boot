@@ -7,6 +7,6 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: akannan1087/platform-build-reusable-workflows-repo/.github/workflows/maven-build.yml@main
+    uses: akannan1087/platform-build-reusable-workflows-repo/.github/workflows/java-build-test.yml@main
     with:
       java-version: '17'
