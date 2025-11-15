@@ -1,4 +1,4 @@
-name: CI - Spring Boot Build
+name: CI - Spring Boot Build Java
 
 on:
   push:
